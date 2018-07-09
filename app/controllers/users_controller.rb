@@ -1,3 +1,6 @@
+require 'sinatra/base'
+require 'rack-flash'
+
 class UsersController < ApplicationController
 
    use Rack::Flash
@@ -14,8 +17,12 @@ class UsersController < ApplicationController
     else
       flash[:message] = "Please create an account."
       redirect '/signup'
+    end
   end
 
+  get '/users/:id' do
+    @user = User.find_by(id: params[:id])
+    erb :'/users/show'
   end
 
 
