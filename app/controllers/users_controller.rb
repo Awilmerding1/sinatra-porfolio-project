@@ -20,6 +20,23 @@ class UsersController < ApplicationController
     end
   end
 
+  get '/login' do
+    erb :'/users/login'
+  end
+
+  post '/login' do
+   @user = User.find_by(username: params[:username])
+   if @user && @user.authenticate(params[:password])
+     session[:user_id] = @user.id
+      @tweets = Tweet.all
+     redirect '/tweets'
+   else
+      flash[:message] = "The username or password is incorrect."
+      redirect '/login'
+   end
+ end
+ 
+
   get '/users/:id' do
     @user = User.find_by(id: params[:id])
     erb :'/users/show'
