@@ -3,6 +3,11 @@ require 'rack-flash'
 
 class HikesController < ApplicationController
 
+  get '/hikes' do
+    @hikes = Hike.all
+    erb :'/hikes/index'
+  end
+
   get '/hikes/new' do
     @mountains = Mountain.all
     erb:'/hikes/new'
@@ -12,7 +17,7 @@ class HikesController < ApplicationController
     @hike = Hike.create(description: params[:description], user_id: session[:user_id])
     @hike.mountain_ids = params[:mountains]
     @hike.save
-    redirect to "hikes/#{@hike.id}/edit"
+    redirect to "users/#{@hike.user_id}"
   end
 
   get '/hikes/:id' do

@@ -2,4 +2,9 @@
 
 <a href="/logout" class="logout">Log Out</a>
 
-<%=@user.hikes.description %>
+<%@user.hikes.each do |hike| %>
+<h4><%hike.mountains.each do |mountain|%></h4>
+<h4><a href="/hikes/<%=hike.id%>"><%=mountain.name%></a></h4>
+<%end%>
+<p><%=hike.description%></p>
+<%end%>
