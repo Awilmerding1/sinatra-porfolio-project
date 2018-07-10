@@ -1,3 +1,7 @@
 <h1 class="welcome">Welcome, <%=@user.username%></h1>
 
 <a href="/logout" class="logout">Log Out</a>
+
+<%@user.mountains.each do |mountain|%>
+<p><%=mountain.name%>   <%=mountain.elevation%></p>
+<%end%>
