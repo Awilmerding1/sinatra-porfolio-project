@@ -1,0 +1,20 @@
+<form action="/lists/" method="POST">
+
+  <input type="hidden" id="hidden" name="_method" value="patch">
+
+<h3>Edit your list below: </h3>
+
+  <h3>Mountains:</h3>
+  <% @mountains.each do |mountain| %>
+  <input id="<%= mountain.name %>" type="checkbox" name="mountains[]" value="<%= mountain.id %>"><%=mountain.name.titleize%></input>
+  <% end %>
+
+  <h2>Write about your experience: <input type="text" id="description">
+
+  <br></br>
+
+  <input type="submit" value="Edit List" id="submit" name="submit">
+
+
+
+</form>

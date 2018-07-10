@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180710152857) do
+ActiveRecord::Schema.define(version: 20180710170339) do
 
   create_table "lists", force: :cascade do |t|
     t.integer "user_id"
+    t.string  "description", default: ""
   end
 
   create_table "mountain_lists", force: :cascade do |t|
