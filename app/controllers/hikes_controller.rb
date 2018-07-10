@@ -15,6 +15,11 @@ class HikesController < ApplicationController
     redirect to "hikes/#{@hike.id}/edit"
   end
 
+  get '/hikes/:id' do
+    @hike = Hike.find(params[:id])
+    erb :'/hikes/show'
+  end
+
   get '/hikes/:id/edit' do
     @hike = Hike.find(params[:id])
     @mountains = Mountain.all
@@ -22,11 +27,10 @@ class HikesController < ApplicationController
   end
 
   patch '/hikes/:id' do
-    @hike = Hike.find(id: session[:user_id])
+    @hike = Hike.find(params[:id])
     @hike.description = params[:description]
-    @hike.mountain_id = params[:mountain]
     @hike.save
-    redirect to "/users/#{@hike.user_id}"
+    redirect to "/hikes/#{@hike.id}"
   end
 
 

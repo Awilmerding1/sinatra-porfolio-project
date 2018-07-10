@@ -4,16 +4,15 @@
 
 <h3>Edit your post below: </h3>
 
-  <h3>Mountains:</h3>
-  <% @mountains.each do |mountain| %>
-  <input id="<%= mountain.name %>" type="checkbox" name="mountains[]" value="<%= mountain.id %>" <%='checked' if @hike.mountains.include?(mountain)%> ><%=mountain.name.titleize%></input>
-  <% end %>
+  <h3><%=@hike.mountains.first.name%></h3>
 
-  <h2>Write about your experience: <input type="text" id="description">
+
+  <h2>Write about your experience:
+    <p><textarea rows="12" cols="80" name="description"><%=@hike.description%> </textarea></p>
 
   <br></br>
 
-  <input type="submit" value="Edit List" id="submit" name="submit">
+  <input type="submit" value="Edit Hike" id="submit" name="submit">
 
 
 
