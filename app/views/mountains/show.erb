@@ -1,0 +1,4 @@
+<%@mountain.hikes.each do |hike|%>
+<h3><a href="/users/<%=hike.user_id%>"><%=hike.user.username%></a></h3>
+<p><%=hike.description%></p>
+<%end%>

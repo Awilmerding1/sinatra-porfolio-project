@@ -5,6 +5,11 @@ class UsersController < ApplicationController
 
    use Rack::Flash
 
+   get '/users' do
+     @users = User.all
+    erb :'/users/index'
+   end
+
   get '/signup' do
     erb :'users/signup'
   end
