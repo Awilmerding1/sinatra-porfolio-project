@@ -1,6 +1,8 @@
 class Mountain < ActiveRecord::Base
-  has_many :mountain_lists
-  has_many :lists, through: :mountain_lists
-  has_many :users, through: :lists
+  has_many :mountain_hikes
+  has_many :hikes, through: :mountain_hikes
+  has_many :users, through: :hikes
+
+
 
 end

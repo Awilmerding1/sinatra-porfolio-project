@@ -2,7 +2,4 @@
 
 <a href="/logout" class="logout">Log Out</a>
 
-<%@user.mountains.each do |mountain|%>
-<p><%=mountain.name%>   <%=mountain.elevation%></p>
-<p><%=mountain.description%></p>
-<%end%>
+<%=@user.hikes.description %>
