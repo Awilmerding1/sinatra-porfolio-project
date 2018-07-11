@@ -1,9 +1,11 @@
+<h2>All Hikes</h2>
+
 <a href="/logout" class="logout">Log Out</a>
 
 <%@hikes.each do |hike|%>
-<p><%=hike.user.username%></p>
+<h3><%=hike.user.username%></h3>
 <h4><%hike.mountains.each do |mountain|%></h4>
-<h4><a href="/mountains/<%=mountain.id%>"><%=mountain.name%></a></h4>
+<h4 class="description"><a href="/hikes/<%=hike.id%>"><%=mountain.name%></a></h4>
 <%end%>
-<p class="description"><%=hike.description%></p>
+<p class="description_index"><%=hike.description%></p>
 <%end%>

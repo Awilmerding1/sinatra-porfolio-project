@@ -1,3 +1,8 @@
+
+<p class="flash"><% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %></p>
+
 <a href="/logout" class="logout">Log Out</a>
 
 <form action="/hikes" method="POST">

@@ -14,10 +14,15 @@ class HikesController < ApplicationController
   end
 
   post '/hikes' do
+    if params[:mountains] != nil
     params[:mountains].each do |mountain|
       @hike = Hike.create(user_id: session[:user_id])
       @hike.mountain_ids = mountain
       @hike.save
+      end
+    else
+      flash[:message] = "You must select at least one mountain."
+      redirect to "hikes/new"
     end
     flash[:message] = "Click a hike to add details about your experience!"
     redirect to "users/#{session[:user_id]}"
