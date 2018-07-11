@@ -21,13 +21,10 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    if !User.find_by(username: params[:username]) && params[:password] != "" && params[:email] != "" && params[:username] != ""
-      @user = User.create(username: params[:username], email: params[:email], password: params[:password])
+    @user = User.create(username: params[:username], email: params[:email], password: params[:password])
+    if @user.valid?
       session[:user_id] = @user.id
       redirect "/users/#{@user.id}"
-    elsif User.find_by(username: params[:username])
-      flash[:message] = "That username is already taken."
-      redirect '/signup'
     else
       flash[:message] = "You must fill out all fields to sign up."
       redirect '/signup'
