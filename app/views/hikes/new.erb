@@ -5,13 +5,14 @@
 
 <a href="/logout" class="logout">Log Out</a>
 
-<form action="/hikes" method="POST">
-
 <h3 class="welcome">Please select at least one mountain to create your list.</h3>
 
   <h3>Mountains:</h3>
+
+<form action="/hikes" method="POST">
+
   <% @mountains.each do |mountain| %>
-  <input id="<%= mountain.name %>" type="checkbox" name="mountains[]" value="<%= mountain.id %>"><%= mountain.name.titleize %></input>
+  <label><input id="<%= mountain.name %>" type="checkbox" name="mountains[]" value="<%= mountain.id %>"><%= mountain.name.titleize %></input></label>
   <% end %>
 
   <br></br>
