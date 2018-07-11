@@ -25,9 +25,12 @@ class UsersController < ApplicationController
     if @user.valid?
       session[:user_id] = @user.id
       redirect "/users/#{@user.id}"
-    else
-      flash[:message] = "You must fill out all fields to sign up."
+    elsif @user.invalid? && User.find_by(username: @user.username)
+      flash[:message] = "That username is already taken."
       redirect '/signup'
+    else
+        flash[:message] = "You must fill out all fields to sign up."
+        redirect '/signup'
     end
   end
 
