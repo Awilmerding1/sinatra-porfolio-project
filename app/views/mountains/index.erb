@@ -1,6 +1,6 @@
-<h2>All Mountains</h2>
+<h2 class="welcome">All Mountains</h2>
 <a href="/logout" class="logout">Log Out</a>
 
 <%@mountains.each do |mountain|%>
-<p class="user_list"><a href="/mountains/<%=mountain.id%>"><%=mountain.name%></a>        <%=mountain.elevation%></p>
+<p class="user_list"><a href="/mountains/<%=mountain.id%>"><%=mountain.name%></a>        (<%=mountain.elevation%>)</p>
 <%end%>
