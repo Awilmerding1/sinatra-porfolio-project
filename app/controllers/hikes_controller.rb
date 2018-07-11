@@ -14,10 +14,13 @@ class HikesController < ApplicationController
   end
 
   post '/hikes' do
-    @hike = Hike.create(description: params[:description], user_id: session[:user_id])
-    @hike.mountain_ids = params[:mountains]
-    @hike.save
-    redirect to "users/#{@hike.user_id}"
+    params[:mountains].each do |mountain|
+      @hike = Hike.create(user_id: session[:user_id])
+      @hike.mountain_ids = mountain
+      @hike.save
+    end
+    flash[:message] = "Click a hike to add details about your experience!"
+    redirect to "users/#{session[:user_id]}"
   end
 
   get '/hikes/:id' do
@@ -35,7 +38,7 @@ class HikesController < ApplicationController
     @hike = Hike.find(params[:id])
     @hike.description = params[:description]
     @hike.save
-    redirect to "/hikes/#{@hike.id}"
+    redirect to "/users/#{@hike.user_id}"
   end
 
 

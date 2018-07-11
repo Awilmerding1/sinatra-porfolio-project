@@ -3,33 +3,59 @@
 
   #header {
     display: inline;
+    margin-left: 10px;
+  }
+
+  .logout {
+    float: right;
+    display: inline;
+    margin-right: 10px;
   }
 
   .links {
        float: right;
         display: inline;
         padding-left: 10px;
+        margin-right: 10px;
+     }
+
+     .links a:link, .links a:visited, .links a:hover, .links a:active {
+        color: lightblue;
+     }
+
+     a:visited {
+       color: blue;
      }
 
      .welcome {
        display: inline;
      }
 
+     .top_bar {
+       background-color: green;
+       color: white;
+        padding: 10px;
+     }
+
+     .flash {
+       color: green;
+       font-size: 20px;
+       font-weight: bold;
+     }
 
   </style>
 </head>
 <body>
-  <div>
-
+  <div class="top_bar">
+    <br>
     <h1 id="header">Adirondack 46ers</h1>
-    <p class="links"><a href="/users">My Hikes</a></p>
     <p class="links"><a href="/hikes/new">New Hike</a></p>
     <p class="links"><a href="/hikes">All Hikes</a></p>
     <p class="links"><a href="/mountains">All Mountains</a></p>
     <p class="links"><a href="/users">All Users</a></p>
-    <p class="links"><a href="/users">My Users</a></p>
 <br></br>
   </div>
+  <br></br>
   <div class="container">
 
   </div>

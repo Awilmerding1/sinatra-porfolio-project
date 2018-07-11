@@ -1,4 +1,8 @@
-<h1 class="welcome">Welcome, <%=@user.username%></h1>
+<p class="flash"><% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %></p>
+
+<h1 class="welcome">Welcome to <%=@user.username%>'s Hike Tracker!</h1>
 
 <a href="/logout" class="logout">Log Out</a>
 
