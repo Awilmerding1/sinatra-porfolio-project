@@ -4,21 +4,33 @@ require 'rack-flash'
 class HikesController < ApplicationController
 
   get '/hikes' do
-    @hikes = Hike.all
-    erb :'/hikes/index'
+    if Helpers.is_logged_in?(session)
+      @user = Helpers.current_user(session)
+      @hikes = Hike.all
+      erb :'/hikes/index'
+    else
+      flash[:message] = "Please signup or login to view that page."
+      redirect to '/'
+    end
   end
 
   get '/hikes/new' do
-    @mountains = Mountain.all
-    erb:'/hikes/new'
+    if Helpers.is_logged_in?(session)
+      @user = Helpers.current_user(session)
+      @mountains = Mountain.all
+      erb:'/hikes/new'
+    else
+      flash[:message] = "Please signup or login to view that page."
+      redirect to '/'
+    end
   end
 
   post '/hikes' do
     if params[:mountains] != nil
-    params[:mountains].each do |mountain|
-      @hike = Hike.create(user_id: session[:user_id])
-      @hike.mountain_ids = mountain
-      @hike.save
+      params[:mountains].each do |mountain|
+        @hike = Hike.create(user_id: session[:user_id])
+        @hike.mountain_ids = mountain
+        @hike.save
       end
     else
       flash[:message] = "You must select at least one mountain."
@@ -29,14 +41,30 @@ class HikesController < ApplicationController
   end
 
   get '/hikes/:id' do
-    @hike = Hike.find(params[:id])
-    erb :'/hikes/show'
+    if Helpers.is_logged_in?(session)
+      @hike = Hike.find(params[:id])
+      erb :'/hikes/show'
+    else
+      flash[:message] = "Please signup or login to view that page."
+      redirect to '/'
+    end
   end
 
   get '/hikes/:id/edit' do
-    @hike = Hike.find(params[:id])
-    @mountains = Mountain.all
-    erb:'/hikes/edit'
+    if Helpers.is_logged_in?(session)
+     @user = Helpers.current_user(session)
+     @hike = Hike.find(params[:id])
+     @mountains = Mountain.all
+     if @user.hikes.include?(@hike)
+       erb:'/hikes/edit'
+     else
+       flash[:message] = "You may not edit another user's hike."
+       redirect to '/hikes'
+     end
+    else
+      flash[:message] = "Please signup or login to view that page."
+      redirect to '/'
+    end
   end
 
   patch '/hikes/:id' do
@@ -45,6 +73,24 @@ class HikesController < ApplicationController
     @hike.save
     redirect to "/users/#{@hike.user_id}"
   end
+
+  delete '/hikes/:id/delete' do
+	   hike = Hike.find(params[:id])
+    if Helpers.is_logged_in?(session)
+      @user = Helpers.current_user(session)
+      if @user.hikes.include?(hike)
+        @hike = hike
+        @hike.delete
+        redirect to "users/#{@user.id}"
+      else
+        flash[:message] = "You may not delete another user's hike."
+        redirect to '/hikes'
+      end
+    else
+      flash[:message] = "Please signup or login to view that page."
+      redirect to '/'
+    end
+	end
 
 
 end

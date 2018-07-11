@@ -1,3 +1,7 @@
+<p class="flash"><% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %></p>
+
 <h1>Welcome to the Adirondack 46er Tracker!</h1>
 
 <h3>Please <a href="/signup">Sign Up</a> or <a href="/login">Log In</a></h3>

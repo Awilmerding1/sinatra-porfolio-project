@@ -35,7 +35,13 @@ class UsersController < ApplicationController
   end
 
   get '/login' do
-    erb :'/users/login'
+    if Helpers.is_logged_in?(session)
+     @user = Helpers.current_user(session)
+     flash[:message] = "You are already logged in."
+     redirect to "/users/#{@user.id}"
+    else
+     erb :'/users/login'
+    end
   end
 
   post '/login' do
