@@ -1,3 +1,7 @@
+<p class="flash"><% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %></p>
+
 <h2 class="welcome">All Hikes</h2>
 
 <a href="/logout" class="logout">Log Out</a>
