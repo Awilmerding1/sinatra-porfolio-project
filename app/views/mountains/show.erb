@@ -1,4 +1,7 @@
+<h2>All Hikes on <%=@mountain.name%></h2>
+<a href="/logout" class="logout">Log Out</a>
+
 <%@mountain.hikes.each do |hike|%>
 <h3><a href="/users/<%=hike.user_id%>"><%=hike.user.username%></a></h3>
-<p><%=hike.description%></p>
+<p class="description"><%=hike.description%></p>
 <%end%>
