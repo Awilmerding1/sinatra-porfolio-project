@@ -7,11 +7,17 @@ class UsersController < ApplicationController
 
    get '/users' do
      @users = User.all
-    erb :'/users/index'
+     erb :'/users/index'
    end
 
   get '/signup' do
-    erb :'users/signup'
+    if Helpers.is_logged_in?(session)
+      @user = User.find(session[:user_id])
+      flash[:message] = "You are already logged in."
+      redirect to "/users/#{@user.id}"
+    else
+      erb :'users/signup'
+    end
   end
 
   post '/signup' do
@@ -19,8 +25,11 @@ class UsersController < ApplicationController
       @user = User.create(username: params[:username], email: params[:email], password: params[:password])
       session[:user_id] = @user.id
       redirect "/users/#{@user.id}"
+    elsif User.find_by(username: params[:username])
+      flash[:message] = "That username is already taken."
+      redirect '/signup'
     else
-      flash[:message] = "Please create an account."
+      flash[:message] = "You must fill out all fields to sign up."
       redirect '/signup'
     end
   end
@@ -47,7 +56,7 @@ class UsersController < ApplicationController
 
   get '/logout' do
     session.clear
-    redirect '/login'
+    redirect '/'
   end
 
 
