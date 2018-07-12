@@ -6,8 +6,14 @@ class UsersController < ApplicationController
    use Rack::Flash
 
    get '/users' do
-     @users = User.all
-     erb :'/users/index'
+     if Helpers.is_logged_in?(session)
+       @user = User.find(session[:user_id])
+       @users = User.all
+       erb :'/users/index'
+     else
+       flash[:message] = "Please signup or login to view that page."
+       redirect to '/'
+     end
    end
 
   get '/signup' do
