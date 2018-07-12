@@ -37,7 +37,7 @@ class HikesController < ApplicationController
       redirect to "hikes/new"
     end
     flash[:message] = "Click a hike to add details about your experience!"
-    redirect to "users/#{session[:user_id]}"
+    redirect to "users/#{@hike.user.slug}"
   end
 
   get '/hikes/:id' do
@@ -75,13 +75,12 @@ class HikesController < ApplicationController
   end
 
   delete '/hikes/:id/delete' do
-	   hike = Hike.find(params[:id])
+	   @hike = Hike.find(params[:id])
     if Helpers.is_logged_in?(session)
       @user = Helpers.current_user(session)
-      if @user.hikes.include?(hike)
-        @hike = hike
+      if @user.hikes.include?(@hike)
         @hike.delete
-        redirect to "users/#{@user.id}"
+        redirect to "users/#{@user.slug}"
       else
         flash[:message] = "You may not delete another user's hike."
         redirect to '/hikes'

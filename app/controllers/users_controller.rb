@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     if Helpers.is_logged_in?(session)
       @user = User.find(session[:user_id])
       flash[:message] = "You are already logged in."
-      redirect to "/users/#{@user.id}"
+      redirect to "/users/#{@user.slug}"
     else
       erb :'users/signup'
     end
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
     @user = User.create(username: params[:username], email: params[:email], password: params[:password])
     if @user.valid?
       session[:user_id] = @user.id
-      redirect "/users/#{@user.id}"
+      redirect "/users/#{@user.slug}"
     elsif @user.invalid? && User.find_by(username: @user.username)
       flash[:message] = "That username is already taken."
       redirect '/signup'
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
     if Helpers.is_logged_in?(session)
      @user = Helpers.current_user(session)
      flash[:message] = "You are already logged in."
-     redirect to "/users/#{@user.id}"
+     redirect to "/users/#{@user.slug}"
     else
      erb :'/users/login'
     end
@@ -54,15 +54,15 @@ class UsersController < ApplicationController
    @user = User.find_by(username: params[:username])
    if @user && @user.authenticate(params[:password])
      session[:user_id] = @user.id
-     redirect "/users/#{@user.id}"
+     redirect "/users/#{@user.slug}"
    else
       flash[:message] = "The username or password is incorrect."
       redirect '/login'
    end
  end
 
-  get '/users/:id' do
-    @user = User.find_by(id: params[:id])
+  get '/users/:slug' do
+    @user = User.find_by_slug(params[:slug])
     erb :'/users/show'
   end
 

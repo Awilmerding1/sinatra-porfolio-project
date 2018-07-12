@@ -2,9 +2,9 @@ module Slugify
   module InstanceMethods
 
     def slug
-      if self.username
+      if self.class == User
         self.username.gsub(/\s/,'-').downcase
-      elsif self.name
+      elsif self.class == Mountain
         self.name.gsub(/\s/,'-').downcase
       end
     end
@@ -15,7 +15,7 @@ module Slugify
     def find_by_slug(slug)
       self.all.each do |s|
         if s.slug == slug
-          return s 
+          return s
         end
       end
     end

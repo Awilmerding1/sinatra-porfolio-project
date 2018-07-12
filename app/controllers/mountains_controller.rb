@@ -14,10 +14,10 @@ class MountainsController < ApplicationController
     end
   end
 
-  get '/mountains/:id' do
+  get '/mountains/:slug' do
     if Helpers.is_logged_in?(session)
       @user = Helpers.current_user(session)
-      @mountain = Mountain.find(params[:id])
+      @mountain = Mountain.find_by_slug(params[:slug])
       erb :'/mountains/show'
     else
       flash[:message] = "Please signup or login to view that page."
