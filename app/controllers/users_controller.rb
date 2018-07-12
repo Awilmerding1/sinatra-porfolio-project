@@ -32,7 +32,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect "/users/#{@user.slug}"
     elsif @user.invalid? && User.find_by(username: @user.username)
-      flash[:message] = "That username is already taken."
+      flash[:message] = "#{@user.username_validation_method}."
       redirect '/signup'
     else
         flash[:message] = "You must fill out all fields to sign up."
