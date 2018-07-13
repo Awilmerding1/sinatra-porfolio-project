@@ -5,6 +5,8 @@
 <h2 class="welcome">All Mountains</h2>
 <a href="/logout" class="logout">Log Out</a>
 
+<ol>
 <%@mountains.each do |mountain|%>
-<p class="user_list"><a href="/mountains/<%=mountain.slug%>"><%=mountain.name%></a>        (<%=mountain.elevation%> ft)</p>
+<li class="user_list"><a href="/mountains/<%=mountain.slug%>"><%=mountain.name%></a>        (<%=mountain.elevation%> ft)</li>
 <%end%>
+<ol>

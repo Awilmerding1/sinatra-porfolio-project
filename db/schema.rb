@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180713151001) do
+ActiveRecord::Schema.define(version: 20180711204549) do
 
   create_table "hikes", force: :cascade do |t|
     t.string  "description"
@@ -27,8 +27,6 @@ ActiveRecord::Schema.define(version: 20180713151001) do
     t.string  "name"
     t.integer "elevation"
   end
-
-  add_index "mountains", ["name"], name: "index_mountains_on_name", unique: true
 
   create_table "users", force: :cascade do |t|
     t.string "username"

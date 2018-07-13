@@ -6,6 +6,5 @@ class Mountain < ActiveRecord::Base
   include Slugify::InstanceMethods
   extend Slugify::ClassMethods
 
-  validates_uniqueness_of :name
 
 end
