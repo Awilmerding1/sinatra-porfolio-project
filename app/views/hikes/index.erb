@@ -8,6 +8,6 @@
 
 <%@hikes.each do |hike|%>
 <h3><%=hike.user.username%></h3>
-<h4 class="description"><a href="/hikes/<%=hike.id%>"><%=hike.mountains%></a>        (<%=hike.mountains%> ft)</h4>
+<h4 class="description"><a href="/hikes/<%=hike.id%>"><%=hike.mountains.first.name%></a>        (<%=hike.mountains.first.elevation%> ft)</h4>
 <p class="description_index"><%=hike.description%></p>
 <%end%>

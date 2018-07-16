@@ -71,7 +71,7 @@ class HikesController < ApplicationController
     @hike = Hike.find(params[:id])
     @hike.description = params[:description]
     @hike.save
-    redirect to "/users/#{@hike.user_id}"
+    redirect to "/users/#{@hike.user.slug}"
   end
 
   delete '/hikes/:id/delete' do
