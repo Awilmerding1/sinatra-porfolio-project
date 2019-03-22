@@ -69,9 +69,14 @@ class HikesController < ApplicationController
 
   patch '/hikes/:id' do
     @hike = Hike.find(params[:id])
-    @hike.description = params[:description]
-    @hike.save
-    redirect to "/users/#{@hike.user.slug}"
+    if @hike.user == Helpers.current_user(session)
+      @hike.description = params[:description]
+      @hike.save
+      redirect to "/users/#{@hike.user.slug}"
+    else
+      flash[:message] = "You may not edit another user's hike."
+      redirect to '/hikes'
+    end
   end
 
   delete '/hikes/:id/delete' do
