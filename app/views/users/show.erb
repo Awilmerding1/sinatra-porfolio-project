@@ -3,7 +3,7 @@
 <% end %></p>
 
 <%if @user == Helpers.current_user(session)%>
-<h1 class="welcome">Welcome to your hike tracker, <%=@user.username%>!</h1>
+<h1 class="welcome">Welcome to your Hike Tracker, <%=@user.username%>!</h1>
 <%else%>
 <h1 class="welcome">Welcome to <%=@user.username%>'s Hike Tracker!</h1>
 <%end%>
